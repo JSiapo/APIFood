@@ -9,7 +9,7 @@ export class Food {
   @Column({ length: 100 })
   options: string;
 
-  @Column()
+  @Column({ default: true })
   state: boolean;
 
   @OneToMany(
