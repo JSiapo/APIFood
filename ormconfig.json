@@ -6,5 +6,6 @@
   "password": "",
   "database": "food",
   "entities": ["dist/entity/**/*.js"],
+  "logging": false,
   "synchronize": true
 }
