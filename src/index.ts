@@ -15,7 +15,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use(FoodRoutes);
+app.set(`port`, process.env.PORT || 3001);
 
-app.listen(3001);
+// app.listen(3001);
 
-console.log('Server on port', 3001);
+app.listen(app.get(`port`), () => {
+  console.log(`Server on port ${app.get(`port`)}`);
+});
