@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm test",
     "build": "tsc",
-    "start": "tsc-watch --onSuccess \"node dist/index.js\""
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
