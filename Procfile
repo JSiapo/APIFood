@@ -1,1 +1,1 @@
-web: ndoejs dist/index.js
+web: nodejs dist/index.js
