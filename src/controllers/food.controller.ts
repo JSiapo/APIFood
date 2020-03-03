@@ -16,7 +16,11 @@ export const getFood = async (
   res: Response
 ): Promise<Response> => {
   const results = await getRepository(Food).findOne(req.params.id);
-  return res.json(results);
+  if (results) {
+    return res.json(results);
+  } else {
+    return res.json({ message: 'Not found' });
+  }
 };
 
 export const createFood = async (
