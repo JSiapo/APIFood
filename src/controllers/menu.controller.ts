@@ -7,8 +7,10 @@ export const getMenus = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const menus = await getRepository(Menu).find();
-  console.log(menus);
+  const menus = await getRepository(Menu)
+    .createQueryBuilder('menu')
+    .leftJoinAndSelect('menu.food', 'food')
+    .getMany();
   return res.json(menus);
 };
 
@@ -16,7 +18,12 @@ export const getMenu = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const results = await getRepository(Menu).findOne(req.params.id);
+  // const results = await getRepository(Menu).findOne(req.params.id);
+  const results = await getRepository(Menu)
+    .createQueryBuilder('menu')
+    .where('menu.id = :id', { id: req.params.id })
+    .leftJoinAndSelect('menu.food', 'food')
+    .getOne();
   console.log(results);
   if (results) {
     return res.json(results);

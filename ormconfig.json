@@ -1,11 +1,12 @@
 {
-  "type": "mysql",
-  "host": "remotemysql.com",
-  "port": 3306,
-  "username": "uFT4YGmGb0",
-  "password": "zgvOPf3vOd",
-  "database": "uFT4YGmGb0",
+  "type": "postgres",
+  "host": "ec2-52-73-247-67.compute-1.amazonaws.com",
+  "port": 5432,
+  "username": "ckbkjebvhlfvpw",
+  "password": "ba447b75968369c261a600e05987128a293b4cfc646780b2e9aeb40e646734bf",
+  "database": "d3kcj9lp6csiek",
   "entities": ["dist/entity/**/*.js"],
   "logging": false,
-  "synchronize": true
+  "synchronize": true,
+  "ssl": true
 }
