@@ -12,6 +12,9 @@ export class Food {
   @Column({ default: true })
   state: boolean;
 
+  @Column({ default: null })
+  image: string;
+
   @OneToMany(
     type => Menu,
     menu => menu.food

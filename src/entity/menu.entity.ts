@@ -14,4 +14,7 @@ export class Menu {
     food => food.menus
   )
   food: Food;
+
+  @Column({ default: true })
+  state: boolean;
 }
