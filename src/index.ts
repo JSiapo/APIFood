@@ -21,3 +21,5 @@ app.use(MenuRoutes);
 app.listen(process.env.PORT || 3001);
 
 console.log('Server on port', 3001);
+
+export default app;

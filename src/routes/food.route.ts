@@ -13,6 +13,6 @@ router.get('/foods', getFoods);
 router.get('/foods/:id', getFood);
 router.post('/foods', createFood);
 router.put('/foods/:id', updateFood);
-router.delete('/Foods/:id', deleteFood);
+router.delete('/foods/:id', deleteFood);
 
 export default router;
