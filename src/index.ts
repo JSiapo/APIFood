@@ -20,6 +20,10 @@ app.use(MenuRoutes);
 
 app.listen(process.env.PORT || 3001);
 
+app.get('/', function(req, res) {
+  res.send('Food API');
+});
+
 console.log('Server on port', 3001);
 
 export default app;
