@@ -1,9 +1,18 @@
 # API for food
 
-Need run a mysql databse.
+API for get foods and menu for days
 
-## Run in dev
+## Requirements
 
-```js
+- A database (support by typeorm)
+
+## How to use
+
+Change options in `ormconfig.json`.
+
+Install dependences and run in **local**.
+
+```bash
+npm i
 npm run dev
 ```
