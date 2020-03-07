@@ -16,3 +16,9 @@ Install dependences and run in **local**.
 npm i
 npm run dev
 ```
+
+---
+
+**Warning**
+
+I use a free host, please if you going to use this project, deploy on your host, because you could pass the limit.
