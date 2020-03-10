@@ -31,8 +31,10 @@
   },
   "homepage": "https://gitlab.com/JSiapo/api-schedule#readme",
   "dependencies": {
+    "@types/helmet": "0.0.45",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "helmet": "^3.21.3",
     "morgan": "^1.9.1",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.0",
