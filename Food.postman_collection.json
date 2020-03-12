@@ -1,0 +1,472 @@
+{
+	"info": {
+		"_postman_id": "245d04ad-5b60-4cdc-a7e1-a470b7869d89",
+		"name": "Food",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMTcyNiwiZXhwIjoxNTg0MTE4MTI2fQ.MyH0_8qNa95j3k0XS1GKf2JazgyMAYaf-vVEo3NDDJI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"siapo44@gmail.com\",\n\t\"password\":\"4\",\n\t\"username\":\"JSiapo4\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMTcyNiwiZXhwIjoxNTg0MTE4MTI2fQ.MyH0_8qNa95j3k0XS1GKf2JazgyMAYaf-vVEo3NDDJI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/users/siapo43@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"siapo43@gmail.com"
+							]
+						},
+						"description": "desde email"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"siapo42@gmail.com\",\n\t\"password\":\"22\",\n\t\"role\":\"admin\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/users/siapo42@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"siapo42@gmail.com"
+							]
+						},
+						"description": "from email"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/users/siapo42@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"siapo42@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Menus",
+			"item": [
+				{
+					"name": "Get Menus",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/menus/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"menus",
+								"7"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Menu",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"fecha\":\"12-03-2020\",\n\t\"food\":1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/menus/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"menus",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Menu",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"fecha\": \"04-03-2020\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/menus/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"menus",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Menus day",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/menus_day/12-03-2020/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"menus_day",
+								"12-03-2020",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Food",
+			"item": [
+				{
+					"name": "Create Food",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"options\":\"Papa a la Huancaina\",\n\t\"image\":\"google.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/foods",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"foods"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Food",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"image\": \"www.pexels.com\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/foods/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"foods",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Foods",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/foods",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"foods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Foods",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/menus/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"menus",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"siapo43@gmail.com\",\n\t\"password\":\"3\",\n\t\"username\":\"JSiapo3\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
