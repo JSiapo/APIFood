@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 import { SECRET_TOKEN } from '../config';
 
 module.exports = function(req: Request, res: Response, next: Function) {
-  if (req.path != '/login') {
+  const path = req.path;
+  if (path != '/login' && path != '/' && path != '/new/user') {
     if (req.headers.authorization) {
       let token = req.headers.authorization.split(' ')[1];
       jwt.verify(token, SECRET_TOKEN, function(error: any, decoded: any) {

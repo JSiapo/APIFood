@@ -9,7 +9,7 @@ import {
 } from '../controllers/user.controller';
 
 router.get('/users/:email', getUser);
-router.post('/users', createUser);
+router.post('/new/user', createUser);
 router.put('/users/:email', updateUser);
 router.delete('/users/:email', deleteUser);
 

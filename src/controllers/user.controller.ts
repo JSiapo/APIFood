@@ -8,7 +8,7 @@ export const getUser = async (
   res: Response
 ): Promise<Response> => {
   const user = await getRepository(User).findOne({
-    email: req.body.email
+    email: req.params.email
   });
   return res.json(user);
 };
@@ -18,7 +18,7 @@ export const updateUser = async (
   res: Response
 ): Promise<Response> => {
   const user = await getRepository(User).findOne({
-    email: req.body.email
+    email: req.params.email
   });
   if (user) {
     getRepository(User).merge(user, req.body);
@@ -33,7 +33,7 @@ export const deleteUser = async (
   res: Response
 ): Promise<Response> => {
   const user = await getRepository(User).findOne({
-    email: req.body.email
+    email: req.params.email
   });
   req.body.state = false;
   if (user) {
