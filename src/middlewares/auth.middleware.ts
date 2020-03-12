@@ -1,0 +1,33 @@
+import { Request, Response } from 'express';
+const jwt = require('jsonwebtoken');
+import { SECRET_TOKEN } from '../config';
+
+module.exports = function(req: Request, res: Response, next: Function) {
+  if (req.path != '/login') {
+    if (req.headers.authorization) {
+      let token = req.headers.authorization.split(' ')[1];
+      jwt.verify(token, SECRET_TOKEN, function(error: any, decoded: any) {
+        if (error)
+          return res.status(403).send({
+            message: "You don't have access",
+            error
+          });
+        if (req.method != 'GET') {
+          //Validar 🔑
+          if (decoded.role == 'guest') next();
+          else
+            res.status(403).send({
+              message: "You don't have access."
+            });
+        } else {
+          next();
+        }
+      });
+    } else
+      res.status(403).send({
+        message: "You don't have access."
+      });
+  } else {
+    next();
+  }
+};

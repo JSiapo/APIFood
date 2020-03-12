@@ -3,30 +3,40 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { createConnection } from 'typeorm';
-import helmet from 'helmet';
-import dontSniffMimetype from 'dont-sniff-mimetype';
-import frameguard from 'frameguard';
-import xssFilter from 'x-xss-protection';
+import { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } from './config';
 
-// Don't allow me to be in ANY frames:
 import FoodRoutes from './routes/food.route';
 import MenuRoutes from './routes/menu.routes';
+import UserRoutes from './routes/user.route';
+import AuthRoute from './routes/auth.route';
 
 const app = express();
-createConnection();
+createConnection({
+  type: 'postgres',
+  host: DB_HOST,
+  port: 5432,
+  username: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_NAME,
+  entities: ['dist/entity/**/*.js'],
+  logging: false,
+  synchronize: true,
+  ssl: true
+});
+
+const AuthToken = require('./middlewares/auth.middleware');
+
+app.use(AuthToken);
 
 //middlewares
 app.use(cors());
-app.use(helmet()); //Secure 🔒
-app.use(xssFilter({ mode: null })); //Secure 🔒
-app.use(dontSniffMimetype()); //Secure 🔒
-app.use(frameguard({ action: 'deny' })); //Secure 🔒
 app.use(morgan('dev'));
 app.use(express.json());
-app.disable('x-powered-by');
 
 app.use(FoodRoutes);
 app.use(MenuRoutes);
+app.use(UserRoutes);
+app.use(AuthRoute);
 
 app.listen(process.env.PORT || 3001);
 
