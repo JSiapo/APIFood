@@ -7,3 +7,4 @@ export const DB_PASSWORD =
   process.env.DB_PASSWORD ||
   '1fdc3e48d8dfa52c6ed6f6176a428beb1832ffff2c37861a20fbf28502a657a6';
 export const SALT = process.env.SALT || 10;
+export const TOKEN_EXPIRE = process.env.TOKEN_EXPIRE || '1d';

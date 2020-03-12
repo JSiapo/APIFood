@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import { User } from '../entity/user.entity';
-import { SECRET_TOKEN } from '../config';
+import { SECRET_TOKEN, TOKEN_EXPIRE } from '../config';
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
   // console.log(req.body);
@@ -22,7 +22,9 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         role: user?.role,
         state: user?.state
       };
-      const token = jwt.sign(payload, SECRET_TOKEN, { expiresIn: '1d' });
+      const token = jwt.sign(payload, SECRET_TOKEN, {
+        expiresIn: TOKEN_EXPIRE
+      });
       return res.json({ token });
     } else {
       return res.status(404).json({ message: 'Password invaild' });
