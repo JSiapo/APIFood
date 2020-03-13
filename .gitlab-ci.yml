@@ -12,7 +12,9 @@ cache:
 
 build:
   stage: build
-  script: npm run build
+  script:
+    - npm run build
+    - npm start
 
 test:
   stage: test
