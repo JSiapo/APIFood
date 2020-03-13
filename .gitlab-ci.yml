@@ -1,3 +1,7 @@
+stages:
+  - build
+  - test
+
 image: node:latest
 
 # This folder is cached between builds
@@ -6,8 +10,20 @@ cache:
   paths:
     - node_modules/
 
+build:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - node_modules/
+  only:
+    - develop
+
 test:
   stage: test
   script:
-    - npm install
     - npm test
+  only:
+    - develop
