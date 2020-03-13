@@ -46,4 +46,4 @@ app.get('/', function(req, res) {
 
 console.log('Server on port', 3001);
 
-export default app;
+module.exports = app;
