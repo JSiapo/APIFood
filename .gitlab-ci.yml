@@ -13,6 +13,7 @@ cache:
 build:
   stage: build
   script:
+    - curl https://apihomefood.herokuapp.com
     - npm install
     - npm run build
   artifacts:
