@@ -9,6 +9,7 @@ image: node:latest
 cache:
   paths:
     - node_modules/
+    - dist/
 
 build:
   stage: build
@@ -16,15 +17,12 @@ build:
     - curl https://apihomefood.herokuapp.com
     - npm install
     - npm run build
-  artifacts:
-    paths:
-      - node_modules/
   only:
     - develop
 
 test:
   stage: test
   script:
-    - npm test
+    - npm run test
   only:
     - develop

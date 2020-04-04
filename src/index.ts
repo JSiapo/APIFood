@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import { createConnection } from 'typeorm';
+import { createConnection, Connection } from 'typeorm';
 import { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } from './config';
 
 import FoodRoutes from './routes/food.route';
@@ -21,9 +21,8 @@ createConnection({
   entities: ['dist/entity/**/*.js'],
   logging: false,
   synchronize: true,
-  ssl: true
+  ssl: true,
 });
-
 const AuthToken = require('./middlewares/auth.middleware');
 
 app.use(AuthToken);
@@ -40,10 +39,10 @@ app.use(AuthRoute);
 
 app.listen(process.env.PORT || 3001);
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
   res.send('Food API');
 });
 
 console.log('Server on port', 3001);
-
-export default app;
+// export default app;
+module.exports = app;

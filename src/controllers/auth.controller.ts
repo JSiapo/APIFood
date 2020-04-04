@@ -9,7 +9,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
   // console.log(req.body);
   if (req.body.email && req.body.password) {
     const user = await getRepository(User).findOne({
-      email: req.body.email
+      email: req.body.email,
     });
     const pass_encrypt = await bcrypt.compare(
       req.body.password,
@@ -20,10 +20,10 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         username: user?.username,
         email: user?.email,
         role: user?.role,
-        state: user?.state
+        state: user?.state,
       };
       const token = jwt.sign(payload, SECRET_TOKEN, {
-        expiresIn: TOKEN_EXPIRE
+        expiresIn: TOKEN_EXPIRE,
       });
       return res.json({ token });
     } else {
