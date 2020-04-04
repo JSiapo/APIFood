@@ -14,7 +14,7 @@ API to obtain food and menu for days, which will be used in different client app
 
 ## How to use
 
-Change the database configuration in `ormconfig.json`.
+Change the database configuration in `config.ts` or your variables.
 
 ### Run in local
 
