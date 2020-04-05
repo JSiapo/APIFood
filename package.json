@@ -4,8 +4,8 @@
   "description": "Api to organize food",
   "main": "index.js",
   "scripts": {
-    "test": "jest --forceExit",
-    "test-dev": "jest --watch",
+    "test-ci": "jest --forceExit",
+    "test": "jest --watch",
     "test-mocha": "mocha dist/tests/ --exit",
     "build": "tsc",
     "start": "node dist/index.js",
