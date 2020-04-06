@@ -4,10 +4,9 @@ import {
   PrimaryGeneratedColumn,
   Index,
   BeforeInsert,
-  BeforeUpdate
+  BeforeUpdate,
 } from 'typeorm';
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 import { SALT } from '../config';
 
 @Entity()

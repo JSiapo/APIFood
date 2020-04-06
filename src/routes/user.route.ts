@@ -5,12 +5,12 @@ import {
   getUser,
   createUser,
   deleteUser,
-  updateUser
+  updateUser,
 } from '../controllers/user.controller';
 
-router.get('/users/:email', getUser);
-router.post('/new/user', createUser);
-router.put('/users/:email', updateUser);
-router.delete('/users/:email', deleteUser);
+router.get('/users/', getUser);
+router.post('/user/new', createUser);
+router.put('/users/:id', updateUser);
+router.delete('/users/:id', deleteUser);
 
 export default router;

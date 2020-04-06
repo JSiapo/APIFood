@@ -8,27 +8,37 @@ import { SECRET_TOKEN, TOKEN_EXPIRE } from '../config';
 export const login = async (req: Request, res: Response): Promise<Response> => {
   // console.log(req.body);
   if (req.body.email && req.body.password) {
-    const user = await getRepository(User).findOne({
-      email: req.body.email
-    });
-    const pass_encrypt = await bcrypt.compare(
-      req.body.password,
-      user?.password
-    );
-    if (pass_encrypt) {
-      const payload = {
-        username: user?.username,
-        email: user?.email,
-        role: user?.role,
-        state: user?.state
-      };
-      const token = jwt.sign(payload, SECRET_TOKEN, {
-        expiresIn: TOKEN_EXPIRE
+    try {
+      const user = await getRepository(User).findOne({
+        email: req.body.email,
       });
-      return res.json({ token });
-    } else {
-      return res.status(404).json({ message: 'Password invaild' });
+      console.log(req.query);
+      const pass_encrypt = await bcrypt.compare(
+        req.body.password,
+        user?.password
+      );
+      if (pass_encrypt) {
+        const payload = {
+          username: user?.username,
+          email: user?.email,
+          role: user?.role,
+          state: user?.state,
+        };
+        const token = jwt.sign(payload, SECRET_TOKEN, {
+          expiresIn: TOKEN_EXPIRE,
+        });
+        return res.json({ token });
+      } else {
+        return res.status(401).json({ message: 'Password invaild' });
+      }
+    } catch (error) {
+      const keyError = error.message.split(' ')[0];
+      return res.status(400).json({
+        message: `${error.message}`,
+        detail: `${error.detail}`,
+        key: `${keyError.charAt(0).toUpperCase() + keyError.slice(1)}`,
+      });
     }
   }
-  return res.status(404).json({ message: 'Not found email' });
+  return res.status(204).json({ message: 'Not found email' });
 };
