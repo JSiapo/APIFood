@@ -2,7 +2,7 @@ stages:
   - build
   - test
 
-image: node:latest
+image: node:12-alpine
 
 # This folder is cached between builds
 # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
@@ -10,6 +10,7 @@ cache:
   paths:
     - node_modules/
     - dist/
+    - coverage/
 
 build:
   stage: build
@@ -25,3 +26,4 @@ test:
     - npm run test-ci
   only:
     - develop
+  coverage: /All files\s*\|\s*([\d\.]+)/
