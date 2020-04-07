@@ -23,7 +23,9 @@ build:
 test:
   stage: test
   script:
+    - npm i -D newman
     - npm run test-ci
+    - npm run test:postman
   only:
     - develop
   coverage: /All files\s*\|\s*([\d\.]+)/
