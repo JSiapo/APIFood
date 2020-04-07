@@ -2,7 +2,7 @@ stages:
   - build
   - test
 
-image: node:12-alpine
+image: node:12
 
 # This folder is cached between builds
 # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
