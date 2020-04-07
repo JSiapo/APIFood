@@ -39,5 +39,5 @@ dev_deploy:
     - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
   except:
     - master
-  only:
-    - merge_requests
+  # only:
+  #   - merge_requests
