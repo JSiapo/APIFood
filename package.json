@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test-ci": "jest --color --coverage --forceExit",
-    "test": "jest --watch --coverage",
+    "test": "jest --watch",
     "test-mocha": "mocha dist/tests/ --exit",
     "build": "tsc",
-    "start": "tsc-watch --onSuccess \"node ./dist/index.js\"",
+    "start": "node dist/index.js",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\""
   },
   "repository": {
@@ -33,7 +33,6 @@
   "homepage": "https://gitlab.com/JSiapo/api-schedule#readme",
   "dependencies": {
     "bcrypt": "^4.0.1",
-    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^3.22.0",

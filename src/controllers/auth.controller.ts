@@ -12,7 +12,6 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
       const user = await getRepository(User).findOne({
         email: req.body.email,
       });
-      console.log(req.query);
       const pass_encrypt = await bcrypt.compare(
         req.body.password,
         user?.password
