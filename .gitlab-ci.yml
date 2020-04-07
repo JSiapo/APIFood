@@ -35,4 +35,4 @@ dev_deploy:
   script:
     - gem install dpl
     - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
-  expect: master
+  except: master
