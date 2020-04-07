@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - deploy
 
 image: node:12-alpine
 
@@ -27,3 +28,11 @@ test:
   only:
     - develop
   coverage: /All files\s*\|\s*([\d\.]+)/
+
+dev_deploy:
+  stage: deploy
+  image: ruby:2.7-alpine
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
+  expect: master
