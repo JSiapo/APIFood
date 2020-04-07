@@ -1,7 +1,6 @@
 stages:
   - build
   - test
-  - deploy
 
 image: node:12-alpine
 
@@ -18,26 +17,10 @@ build:
   script:
     - npm install
     - npm run build
-  only:
-    - develop
 
 test:
   stage: test
   script:
+    - curl https://food-web-home.herokuapp.com/
     - npm run test-ci
-  only:
-    - develop
   coverage: /All files\s*\|\s*([\d\.]+)/
-
-dev_deploy:
-  stage: deploy
-  image: ruby:2.7
-  script:
-    - apt-get update -qy
-    - apt-get install -y ruby-dev
-    - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
-  except:
-    - master
-  # only:
-  #   - merge_requests
