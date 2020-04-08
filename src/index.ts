@@ -2,7 +2,6 @@ import 'reflect-metadata';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import bodyParser from 'body-parser';
 const helmet = require('helmet');
 import { createConnection } from 'typeorm';
 import { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, NODE_ENV } from './config';
@@ -27,7 +26,6 @@ createConnection({
 });
 const AuthToken = require('./middlewares/auth.middleware');
 app.use(helmet());
-app.use(bodyParser.json());
 app.use(cors());
 app.use(AuthToken);
 
@@ -36,17 +34,21 @@ app.use(cors());
 NODE_ENV == 'develop' ? app.use(morgan('dev')) : app.use(morgan('tiny'));
 app.use(express.json());
 
-app.use(FoodRoutes);
-app.use(MenuRoutes);
-app.use(UserRoutes);
-app.use(AuthRoute);
-
-app.listen(process.env.PORT || 3001);
+app.use('/api', FoodRoutes);
+app.use('/api', MenuRoutes);
+app.use('/api', UserRoutes);
+app.use('/api', AuthRoute);
 
 app.get('/', function (req, res) {
   res.send('Food API');
 });
 
+function stop() {
+  server.close();
+}
+
+let server = app.listen(process.env.PORT || 3001);
 console.log('Server on port', 3001);
 // export default app;
 module.exports = app;
+module.exports.stop = stop;

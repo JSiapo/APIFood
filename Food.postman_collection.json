@@ -10,6 +10,18 @@
 			"item": [
 				{
 					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91de8205-283e-4764-8c2c-b8882cac8fb3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -20,23 +32,23 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjEzMTc5MiwiZXhwIjoxNTg2MjE4MTkyfQ.k9xmAMAQaP36iUTXiMpVLzbYaCOYjJnCvC2likmgIno",
-								"type": "text",
-								"disabled": true
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjIxODY0NCwiZXhwIjoxNTg2MzA1MDQ0fQ.5QhEqUj6gCbdxyOCuLliZSj4J4rjy4GP54QLfpYjFpg",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\":\"siapo49@gmail.com\",\n\t\"password\":\"1234567\",\n\t\"username\":\"JSiapo9\",\n\t\"role\":\"admin\"\n}"
+							"raw": "{\n\t\"email\":\"siapo53@gmail.com\",\n\t\"password\":\"1234567\",\n\t\"username\":\"JSiapo53\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3001/user/new",
+							"raw": "http://localhost:3001/api/user/new",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"user",
 								"new"
 							]
@@ -46,6 +58,58 @@
 				},
 				{
 					"name": "Get User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bccf7575-c019-46b9-ac70-be7d69bbc7d0",
+								"exec": [
+									"pm.test(\"Payload must be valid and have a body\", function () { \r",
+									"     pm.response.to.be.ok;\r",
+									"     pm.response.to.be.withBody; // body tiene que exitir\r",
+									"     pm.response.to.be.json; // además que sea un JSON válido\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"username\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"email\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"password\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"role\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"state\");\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"   \"items\": { \"$ref\": \"userSchema\" }\r",
+									"};\r",
+									"\r",
+									"var userSchema = {\r",
+									"   \"properties\": {\r",
+									"       \"id\" : { \"type\": \"integer\" },\r",
+									"       \"username\": { \"type\": \"string\" },\r",
+									"       \"name\": { \"type\": \"string\" },\r",
+									"       \"email\" : { \"type\": \"string\" },\r",
+									"       \"password\" : { \"type\": \"string\" },\r",
+									"       \"role\" : { \"type\": \"string\" },\r",
+									"       \"state\" : { \"type\": \"boolean\" },\r",
+									"   }\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -56,25 +120,26 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjEzMTc5MiwiZXhwIjoxNTg2MjE4MTkyfQ.k9xmAMAQaP36iUTXiMpVLzbYaCOYjJnCvC2likmgIno",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjIxNDQ1OCwiZXhwIjoxNTg2MzAwODU4fQ.uoFq4EQJ4lvU_ynZlI13EA9QpMUPfS1cEHejxg6mMPs",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3001/users/?email=siapo49@gmail.com",
+							"raw": "http://localhost:3001/api/users/?email=siapo46@gmail.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"users",
 								""
 							],
 							"query": [
 								{
 									"key": "email",
-									"value": "siapo49@gmail.com"
+									"value": "siapo46@gmail.com"
 								}
 							]
 						},
@@ -100,7 +165,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\":\"Pepe49\",\n\t\"password\":\"222222\",\n\t\"role\":\"admin\"\n}"
+							"raw": "{\n\t\"username\":\"JSiapo7\",\n\t\"password\":\"222222\",\n\t\"role\":\"admin\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3001/users/?email=siapo49@gmail.com",
@@ -426,6 +491,53 @@
 		},
 		{
 			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e2ad578-c817-493f-9679-826a0722ced3",
+						"exec": [
+							"pm.test(\"Payload must be valid and have a body\", function () { \r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody; // body tiene que exitir\r",
+							"     pm.response.to.be.json; // además que sea un JSON válido\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"token\");\r",
+							"});\r",
+							"\r",
+							"var schema = {\r",
+							"  \"items\": {\r",
+							"    \"type\": \"string\"\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"pm.test('Schema is valid', function() {\r",
+							"  pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b9b77bd7-4601-4ff7-9eff-30b6a2f9e39b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -440,13 +552,12 @@
 					"raw": "{\n\t\"email\":\"siapo43@gmail.com\",\n\t\"password\":\"3\",\n\t\"username\":\"JSiapo3\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3001/login",
-					"protocol": "http",
+					"raw": "{{base_url}}/api/login",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "3001",
 					"path": [
+						"api",
 						"login"
 					]
 				}
