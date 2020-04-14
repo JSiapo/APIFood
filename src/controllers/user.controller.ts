@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
+import IsEmail from '../utils/email';
 
 import { User } from '../entity/user.entity';
 //TODO usar try catch para todas las consultas
@@ -7,6 +8,9 @@ export const getUser = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
+  if (!IsEmail(req.body.email)) {
+    return res.status(401).json({ message: 'Email invaild' });
+  }
   try {
     const user = await getRepository(User).findOne({
       email: req.query.email,
@@ -26,6 +30,9 @@ export const updateUser = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
+  if (!IsEmail(req.body.email)) {
+    return res.status(401).json({ message: 'Email invaild' });
+  }
   try {
     const user = await getRepository(User).findOne({
       email: req.params.id,
@@ -51,6 +58,9 @@ export const deleteUser = async (
   res: Response
 ): Promise<Response> => {
   try {
+    if (!IsEmail(req.body.email)) {
+      return res.status(401).json({ message: 'Email invaild' });
+    }
     const user = await getRepository(User).findOne({
       email: req.params.id,
     });
@@ -76,6 +86,9 @@ export const createUser = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
+  if (!IsEmail(req.body.email)) {
+    return res.status(401).json({ message: 'Email invaild' });
+  }
   try {
     if (req.body.email && req.body.password) {
       const temp_user = req.body;

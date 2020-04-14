@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "245d04ad-5b60-4cdc-a7e1-a470b7869d89",
+		"_postman_id": "6a9b039a-e74f-43d7-99a7-dfaa4c4e3a25",
 		"name": "Food",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -10,18 +10,6 @@
 			"item": [
 				{
 					"name": "Create User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "91de8205-283e-4764-8c2c-b8882cac8fb3",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -32,25 +20,26 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjIxODY0NCwiZXhwIjoxNTg2MzA1MDQ0fQ.5QhEqUj6gCbdxyOCuLliZSj4J4rjy4GP54QLfpYjFpg",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMTcyNiwiZXhwIjoxNTg0MTE4MTI2fQ.MyH0_8qNa95j3k0XS1GKf2JazgyMAYaf-vVEo3NDDJI",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\":\"siapo53@gmail.com\",\n\t\"password\":\"1234567\",\n\t\"username\":\"JSiapo53\"\n}"
+							"raw": "{\n\t\"email\":\"siapo44@gmail.com\",\n\t\"password\":\"4\",\n\t\"username\":\"JSiapo4\"\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/user/new",
+							"raw": "http://localhost:3001/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
-								"api",
-								"user",
-								"new"
+								"users"
 							]
 						}
 					},
@@ -58,58 +47,6 @@
 				},
 				{
 					"name": "Get User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "bccf7575-c019-46b9-ac70-be7d69bbc7d0",
-								"exec": [
-									"pm.test(\"Payload must be valid and have a body\", function () { \r",
-									"     pm.response.to.be.ok;\r",
-									"     pm.response.to.be.withBody; // body tiene que exitir\r",
-									"     pm.response.to.be.json; // además que sea un JSON válido\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Content-Type is present\", function () {\r",
-									"    pm.response.to.have.header(\"Content-Type\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test(\"Body matches string\", function () {\r",
-									"    pm.expect(pm.response.text()).to.include(\"id\");\r",
-									"    pm.expect(pm.response.text()).to.include(\"username\");\r",
-									"    pm.expect(pm.response.text()).to.include(\"email\");\r",
-									"    pm.expect(pm.response.text()).to.include(\"password\");\r",
-									"    pm.expect(pm.response.text()).to.include(\"role\");\r",
-									"    pm.expect(pm.response.text()).to.include(\"state\");\r",
-									"});\r",
-									"\r",
-									"var schema = {\r",
-									"   \"items\": { \"$ref\": \"userSchema\" }\r",
-									"};\r",
-									"\r",
-									"var userSchema = {\r",
-									"   \"properties\": {\r",
-									"       \"id\" : { \"type\": \"integer\" },\r",
-									"       \"username\": { \"type\": \"string\" },\r",
-									"       \"name\": { \"type\": \"string\" },\r",
-									"       \"email\" : { \"type\": \"string\" },\r",
-									"       \"password\" : { \"type\": \"string\" },\r",
-									"       \"role\" : { \"type\": \"string\" },\r",
-									"       \"state\" : { \"type\": \"boolean\" },\r",
-									"   }\r",
-									"};\r",
-									"\r",
-									"pm.test('Schema is valid', function() {\r",
-									"  pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -120,27 +57,20 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjIxNDQ1OCwiZXhwIjoxNTg2MzAwODU4fQ.uoFq4EQJ4lvU_ynZlI13EA9QpMUPfS1cEHejxg6mMPs",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMTcyNiwiZXhwIjoxNTg0MTE4MTI2fQ.MyH0_8qNa95j3k0XS1GKf2JazgyMAYaf-vVEo3NDDJI",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3001/api/users/?email=siapo46@gmail.com",
+							"raw": "http://localhost:3001/users/siapo43@gmail.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
-								"api",
 								"users",
-								""
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "siapo46@gmail.com"
-								}
+								"siapo43@gmail.com"
 							]
 						},
 						"description": "desde email"
@@ -159,16 +89,19 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjEzMTc5MiwiZXhwIjoxNTg2MjE4MTkyfQ.k9xmAMAQaP36iUTXiMpVLzbYaCOYjJnCvC2likmgIno",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\":\"JSiapo7\",\n\t\"password\":\"222222\",\n\t\"role\":\"admin\"\n}"
+							"raw": "{\n\t\"email\":\"siapo42@gmail.com\",\n\t\"password\":\"22\",\n\t\"role\":\"admin\"\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/users/?email=siapo49@gmail.com",
+							"raw": "http://localhost:3001/users/siapo42@gmail.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -176,13 +109,7 @@
 							"port": "3001",
 							"path": [
 								"users",
-								""
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "siapo49@gmail.com"
-								}
+								"siapo42@gmail.com"
 							]
 						},
 						"description": "from email"
@@ -207,7 +134,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:3001/users/siapo42@gmail.com",
@@ -233,34 +163,42 @@
 				{
 					"name": "Get Menus",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjY2NTM2NCwiZXhwIjoxNTg2NzUxNzY0fQ.nNaULbKl3nPDBNV582sW5OgdIndXznfJMSQ4lCSN7z0",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjEzMTc5MiwiZXhwIjoxNTg2MjE4MTkyfQ.k9xmAMAQaP36iUTXiMpVLzbYaCOYjJnCvC2likmgIno",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDkzMDY5MywiZXhwIjoxNTg1MDE3MDkzfQ.X2n3QNmMX0mWsJMOyOnIwnRXhTUCiFLJTSNrzQFsQ1A",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3001/menus/?day=25-03-2020",
-							"protocol": "http",
+							"raw": "{{base_url}}/menus/?id=28",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3001",
 							"path": [
 								"menus",
 								""
 							],
 							"query": [
 								{
-									"key": "id",
-									"value": "1",
+									"key": "",
+									"value": "",
 									"disabled": true
 								},
 								{
-									"key": "day",
-									"value": "25-03-2020"
+									"key": "id",
+									"value": "28"
 								}
 							]
 						}
@@ -270,6 +208,16 @@
 				{
 					"name": "Create Menu",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjY3NTc3OCwiZXhwIjoxNTg2NzYyMTc4fQ.LRUrtILLYwqISbt_psQFjQJ7irOSs-xhmQtjYQiqgFg",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -279,21 +227,23 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NTIwMzQzMywiZXhwIjoxNTg1Mjg5ODMzfQ.EvLQwo6sd8xFXMGqtVbfPDoU2HPkOvDkMas6PAXEUJI",
-								"type": "text"
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"fecha\":\"25-03-2020\",\n\t\"food\":2\n}"
+							"raw": "{\n\t\"fecha\":\"13-04-2020\",\n\t\"food\":2\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/menus/",
-							"protocol": "http",
+							"raw": "{{base_url}}/menus/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3001",
 							"path": [
 								"menus",
 								""
@@ -320,7 +270,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"fecha\": \"04-03-2020\"\n}"
+							"raw": "{\n\t\"fecha\": \"04-03-2020\"\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:3001/menus/4",
@@ -332,6 +285,55 @@
 							"path": [
 								"menus",
 								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Menus day",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjY2NjI0NCwiZXhwIjoxNTg2NzUyNjQ0fQ.O1ONynwTNPuqftMDk9p4TIVTBB_dPtdnDWkD-H8Iyt4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/menus/?day=04-03-2020",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"menus",
+								""
+							],
+							"query": [
+								{
+									"key": "day",
+									"value": "04-03-2020"
+								}
 							]
 						}
 					},
@@ -361,7 +363,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"options\":\"Papa a la Huancaina\",\n\t\"image\":\"google.com\"\n}"
+							"raw": "{\n\t\"options\":\"Papa a la Huancaina\",\n\t\"image\":\"google.com\"\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:3001/foods",
@@ -402,7 +407,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"image\": \"www.pexels.com\"\r\n}"
+							"raw": "{\r\n    \"image\": \"www.pexels.com\"\r\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:3001/foods/5",
@@ -422,29 +430,43 @@
 				{
 					"name": "Get Foods",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjgyMzMzNCwiZXhwIjoxNTg2OTA5NzM0fQ.yXlKAV2PbhwClvCsx9UZlQH2hq_QjWSsqLRN_2AYiNo",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NjEzMTc5MiwiZXhwIjoxNTg2MjE4MTkyfQ.k9xmAMAQaP36iUTXiMpVLzbYaCOYjJnCvC2likmgIno",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpTaWFwbzMiLCJlbWFpbCI6InNpYXBvNDNAZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0Iiwic3RhdGUiOnRydWUsImlhdCI6MTU4NDAzMzEzNCwiZXhwIjoxNTg0MTE5NTM0fQ.FZsQolB02hGZqM6-rdG7No-PYxTHhc8Gc4LFZ5tYTEY",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3001/foods",
-							"protocol": "http",
+							"raw": "{{base_url}}/foods/?id=1",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3001",
 							"path": [
-								"foods"
+								"foods",
+								""
 							],
 							"query": [
 								{
 									"key": "id",
-									"value": "2",
-									"disabled": true
+									"value": "1"
 								}
 							]
 						}
@@ -469,7 +491,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:3001/menus/7",
@@ -491,53 +516,6 @@
 		},
 		{
 			"name": "Login",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "3e2ad578-c817-493f-9679-826a0722ced3",
-						"exec": [
-							"pm.test(\"Payload must be valid and have a body\", function () { \r",
-							"     pm.response.to.be.ok;\r",
-							"     pm.response.to.be.withBody; // body tiene que exitir\r",
-							"     pm.response.to.be.json; // además que sea un JSON válido\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Content-Type is present\", function () {\r",
-							"    pm.response.to.have.header(\"Content-Type\");\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"pm.test(\"Body matches string\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"token\");\r",
-							"});\r",
-							"\r",
-							"var schema = {\r",
-							"  \"items\": {\r",
-							"    \"type\": \"string\"\r",
-							"  }\r",
-							"};\r",
-							"\r",
-							"pm.test('Schema is valid', function() {\r",
-							"  pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "b9b77bd7-4601-4ff7-9eff-30b6a2f9e39b",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -549,15 +527,19 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\":\"siapo43@gmail.com\",\n\t\"password\":\"3\",\n\t\"username\":\"JSiapo3\"\n}"
+					"raw": "{\n\t\"email\":\"siapo43@gmail.com\",\n\t\"password\":\"3\",\n\t\"username\":\"JSiapo3\"\n}",
+					"options": {
+						"raw": {}
+					}
 				},
 				"url": {
-					"raw": "{{base_url}}/api/login",
+					"raw": "http://localhost:3001/login",
+					"protocol": "http",
 					"host": [
-						"{{base_url}}"
+						"localhost"
 					],
+					"port": "3001",
 					"path": [
-						"api",
 						"login"
 					]
 				}

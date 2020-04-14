@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, Raw } from 'typeorm';
 
 import { Food } from '../entity/food.entity';
 
@@ -8,10 +8,7 @@ export const getFood = async (
   res: Response
 ): Promise<Response> => {
   try {
-    if (!req.query.id) {
-      const foods = await getRepository(Food).find();
-      return res.json(foods);
-    } else {
+    if (req.query.id) {
       const results = await getRepository(Food).findOne(req.query.id);
       if (results) {
         return res.json(results);
@@ -19,6 +16,24 @@ export const getFood = async (
         return res.status(204).json({ message: 'Not found' });
       }
     }
+    if (req.query.food) {
+      const [results, count] = await getRepository(Food).findAndCount({
+        options: Raw((option) => `${option} ILIKE '%${req.query.food}%'`),
+      });
+      if (results) {
+        return res.json([results, count]);
+      } else {
+        return res.status(204).json({ message: 'Not found' });
+      }
+    }
+    if (req.query.limit) {
+      const [foods, count] = await getRepository(Food).findAndCount({
+        take: parseInt(req.query.limit),
+      });
+      return res.json([foods, count]);
+    }
+    const [foods, count] = await getRepository(Food).findAndCount();
+    return res.json([foods, count]);
   } catch (error) {
     const keyError = error.message.split(' ')[0];
     return res.status(400).json({

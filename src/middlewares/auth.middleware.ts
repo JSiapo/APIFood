@@ -14,7 +14,7 @@ module.exports = function (req: Request, res: Response, next: Function) {
             error,
           });
         if (req.method != 'GET') {
-          //Validar 🔑
+          //TODO Validar 🔑
           if (decoded.role == 'guest') next();
           else
             res.status(401).send({

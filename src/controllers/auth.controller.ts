@@ -4,10 +4,16 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import { User } from '../entity/user.entity';
 import { SECRET_TOKEN, TOKEN_EXPIRE } from '../config';
+import IsEmail from '../utils/email';
+
+//TODO check email 📧
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
   // console.log(req.body);
   if (req.body.email && req.body.password) {
+    if (!IsEmail(req.body.email)) {
+      return res.status(401).json({ message: 'Email invaild' });
+    }
     try {
       const user = await getRepository(User).findOne({
         email: req.body.email,
