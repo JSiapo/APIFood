@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 const helmet = require('helmet');
@@ -33,6 +33,9 @@ app.use(AuthToken);
 app.use(cors());
 NODE_ENV == 'develop' ? app.use(morgan('dev')) : app.use(morgan('tiny'));
 app.use(express.json());
+app.all('/*', (req: Request, res: Response, next: Function) =>
+  req.method === 'OPTIONS' ? res.status(200).end() : next()
+);
 
 app.use('/api', FoodRoutes);
 app.use('/api', MenuRoutes);
