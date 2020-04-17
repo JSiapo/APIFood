@@ -31,6 +31,12 @@ export class User {
   @Column({ default: true })
   state: boolean;
 
+  @Column({ default: '' })
+  lastConnection: string;
+
+  @Column({ default: '' })
+  createdDay: string;
+
   @BeforeInsert()
   @BeforeUpdate()
   hashpassword(): void {

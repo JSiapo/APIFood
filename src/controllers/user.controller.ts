@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import IsEmail from '../utils/email';
+import moment from 'moment';
+import 'moment/locale/es';
+moment.locale('es');
+
+const TIME_FORMAT = 'MMMM Do YYYY, h:mm:ss a';
 
 import { User } from '../entity/user.entity';
 //TODO usar try catch para todas las consultas
@@ -8,21 +13,56 @@ export const getUser = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  if (!IsEmail(req.body.email)) {
-    return res.status(401).json({ message: 'Email invaild' });
+  if (req.query.email) {
+    if (!IsEmail(req.query.email)) {
+      return res.status(401).json({ message: 'Email invaild' });
+    }
+    try {
+      const user = await getRepository(User).findOne({
+        email: req.query.email,
+      });
+      if (user) {
+        return res.status(200).json(user);
+      } else {
+        return res.status(204).json({ message: 'Not found' });
+      }
+    } catch (error) {
+      const keyError = error.message.split(' ')[0];
+      return res.status(400).json({
+        message: `${error.message}`,
+        detail: `${error.detail}`,
+        key: `${keyError.charAt(0).toUpperCase() + keyError.slice(1)}`,
+      });
+    }
   }
-  try {
-    const user = await getRepository(User).findOne({
-      email: req.query.email,
-    });
-    return res.json(user);
-  } catch (error) {
-    const keyError = error.message.split(' ')[0];
-    return res.status(400).json({
-      message: `${error.message}`,
-      detail: `${error.detail}`,
-      key: `${keyError.charAt(0).toUpperCase() + keyError.slice(1)}`,
-    });
+  if (req.query.id) {
+    try {
+      const user = await getRepository(User).findOne({
+        id: req.query.id,
+      });
+      if (user) {
+        return res.status(200).json(user);
+      } else {
+        return res.status(204).json({ message: 'Not found' });
+      }
+    } catch (error) {
+      const keyError = error.message.split(' ')[0];
+      return res.status(400).json({
+        message: `${error.message}`,
+        detail: `${error.detail}`,
+        key: `${keyError.charAt(0).toUpperCase() + keyError.slice(1)}`,
+      });
+    }
+  }
+  const user = await getRepository(User).find({
+    order: {
+      id: 'ASC',
+    },
+  });
+  if (user) {
+    return res.status(200).json(user);
+  } else {
+    return res.status(204).json({ message: 'Not found' });
   }
 };
 
@@ -30,12 +70,12 @@ export const updateUser = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  if (!IsEmail(req.body.email)) {
+  if (req.body.email && !IsEmail(req.body.email)) {
     return res.status(401).json({ message: 'Email invaild' });
   }
   try {
     const user = await getRepository(User).findOne({
-      email: req.params.id,
+      id: parseInt(req.params.id),
     });
     if (user) {
       getRepository(User).merge(user, req.body);
@@ -62,7 +102,7 @@ export const deleteUser = async (
       return res.status(401).json({ message: 'Email invaild' });
     }
     const user = await getRepository(User).findOne({
-      email: req.params.id,
+      id: parseInt(req.params.id),
     });
     req.body.state = false;
     if (user) {
@@ -86,12 +126,14 @@ export const createUser = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  if (!IsEmail(req.body.email)) {
-    return res.status(401).json({ message: 'Email invaild' });
-  }
   try {
+    let now = moment().format(TIME_FORMAT); // April 15th 2020, 12:47:38 am
     if (req.body.email && req.body.password) {
+      if (!IsEmail(req.body.email)) {
+        return res.status(400).json({ message: 'Email invaild' });
+      }
       const temp_user = req.body;
+      temp_user.createdDay = now;
       try {
         const userfound = await getRepository(User).findOne({
           email: temp_user.email,
