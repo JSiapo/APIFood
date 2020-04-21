@@ -16,7 +16,14 @@ export const getMenu = async (
         .leftJoinAndSelect('menu.food', 'food')
         .getMany();
       if (results) {
-        return res.json(results);
+        return res.json({
+          results,
+          length_active: results.reduce(
+            (acc: number, menu: Menu) => (menu.state ? acc + 1 : acc),
+            0
+          ),
+          length: results.length,
+        });
       } else {
         return res.status(204).json({ message: 'Not found' });
       }
@@ -56,9 +63,26 @@ export const createMenu = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const newFood = getRepository(Menu).create(req.body);
-    const results = await getRepository(Menu).save(newFood);
-    return res.status(201).json(results);
+    // Check food exist in menu
+    let foodNew: Menu = req.body;
+    const foodFound: Array<Menu> = await getRepository(Menu)
+      .createQueryBuilder('menu')
+      .where('menu.fecha = :fecha', { fecha: req.body.fecha })
+      .leftJoinAndSelect('menu.food', 'food')
+      .getMany();
+    const ff: Menu = foodFound.find(
+      (food: Menu) => food.food.id === req.body.food
+    )!;
+    /*Se encontró el menú en el día 🍲 */
+    if (typeof ff !== 'undefined') {
+      getRepository(Menu).merge(ff, { ...ff, state: true });
+      const results = await getRepository(Menu).save(ff);
+      return res.status(201).json(results);
+    } else {
+      const newFood = getRepository(Menu).create(foodNew);
+      const results = await getRepository(Menu).save(newFood);
+      return res.status(201).json(results);
+    }
   } catch (error) {
     const keyError = error.message.split(' ')[0];
     return res.status(400).json({
@@ -97,9 +121,8 @@ export const deleteMenu = async (
 ): Promise<Response> => {
   try {
     const food = await getRepository(Menu).findOne(req.params.id);
-    req.body.state = false;
     if (food) {
-      getRepository(Menu).merge(food, req.body);
+      getRepository(Menu).merge(food, { ...food, state: false });
       const results = await getRepository(Menu).save(food);
       return res.json(results);
     }
