@@ -22,7 +22,7 @@ createConnection({
   entities: ['dist/entity/**/*.js'],
   logging: false,
   synchronize: true,
-  ssl: true,
+  ssl: { rejectUnauthorized: false },
 });
 const AuthToken = require('./middlewares/auth.middleware');
 app.use(helmet());

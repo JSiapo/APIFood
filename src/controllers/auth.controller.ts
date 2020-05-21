@@ -32,7 +32,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         const payload = {
           username: user?.username,
           email: user?.email,
-          // role: user?.role,
+          role: user?.role,
           state: user?.state,
         };
         const token = jwt.sign(payload, SECRET_TOKEN, {

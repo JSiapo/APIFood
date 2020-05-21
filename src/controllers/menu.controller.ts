@@ -58,7 +58,7 @@ export const createMenu = async (
   try {
     const newFood = getRepository(Menu).create(req.body);
     const results = await getRepository(Menu).save(newFood);
-    return res.json(results);
+    return res.status(201).json(results);
   } catch (error) {
     const keyError = error.message.split(' ')[0];
     return res.status(400).json({
@@ -78,9 +78,9 @@ export const updateMenu = async (
     if (food) {
       getRepository(Menu).merge(food, req.body);
       const results = await getRepository(Menu).save(food);
-      return res.json(results);
+      return res.status(201).json(results);
     }
-    return res.status(204).json({ message: 'Not food found' });
+    return res.status(404).json({ message: 'Not food found' });
   } catch (error) {
     const keyError = error.message.split(' ')[0];
     return res.status(400).json({
