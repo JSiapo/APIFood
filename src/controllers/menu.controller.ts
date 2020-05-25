@@ -7,109 +7,105 @@ export const getMenu = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  try {
-    if (req.query.day) {
-      // Other controllers 🔥🔥🔥
-      const results = await getRepository(Menu)
-        .createQueryBuilder('menu')
-        .where('menu.fecha = :fecha', { fecha: req.query.day })
-        .leftJoinAndSelect('menu.food', 'food')
-        .getMany();
-      if (results) {
-        return res.json(results);
-      } else {
-        return res.status(204).json({ message: 'Not found' });
-      }
-    }
-    if (req.query.id) {
-      // const results = await getRepository(Menu).findOne(req.query.id);
-      const results = await getRepository(Menu)
-        .createQueryBuilder('menu')
-        .where('menu.id = :id', { id: req.query.id })
-        .leftJoinAndSelect('menu.food', 'food')
-        .getOne();
-      if (results) {
-        return res.json(results);
-      } else {
-        return res.status(204).json({ message: 'Not found' });
-      }
-    } else {
-      const menus = await getRepository(Menu)
-        .createQueryBuilder('menu')
-        .leftJoinAndSelect('menu.food', 'food')
-        .orderBy('menu.id', 'ASC')
-        .getMany();
-      return res.json(menus);
-    }
-  } catch (error) {
-    const keyError = error.message.split(' ')[0];
-    return res.status(400).json({
-      message: `${error.message}`,
-      detail: `${error.detail}`,
-      key: `${keyError.charAt(0).toUpperCase() + keyError.slice(1)}`,
-    });
-  }
+  let response: Menu[] | { foods: Menu[]; lenght: number } | {} | undefined;
+  req?.query?.day &&
+    (response = await getRepository(Menu)
+      .findAndCount({ where: [{ state: true, fecha: req.query.day }] })
+      .then((result) => {
+        return { foods: result[0], lenght: result[1] };
+      })
+      .catch((err: Error) => {
+        throw res.status(404).send(err.message);
+      }));
+  req?.query?.id &&
+    (response = await getRepository(Menu)
+      .findOne({ id: parseInt(req.query.id) })
+      .then((foods) => (foods ? foods : {}))
+      .catch((err: Error) => {
+        throw res.status(404).send(err.message);
+      }));
+  !req?.query?.id &&
+    !req?.query?.day &&
+    (response = await getRepository(Menu)
+      .findAndCount({ where: [{ state: true }] })
+      .then(async (result) => {
+        return { foods: result[0], lenght: result[1] };
+      })
+      .catch((err: Error) => {
+        throw res.status(404).send(err.message);
+      }));
+  return res.status(200).json(response);
 };
 
 export const createMenu = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  try {
-    const newFood = getRepository(Menu).create(req.body);
-    const results = await getRepository(Menu).save(newFood);
-    return res.json(results);
-  } catch (error) {
-    const keyError = error.message.split(' ')[0];
-    return res.status(400).json({
-      message: `${error.message}`,
-      detail: `${error.detail}`,
-      key: `${keyError.charAt(0).toUpperCase() + keyError.slice(1)}`,
-    });
-  }
+  const menuFind: Menu | undefined = await getRepository(Menu).findOne({
+    where: [{ state: true, fecha: req?.body?.fecha, food: req?.body?.food }],
+  });
+  const menu = new Menu();
+  menu.fecha = req?.body?.fecha;
+  menu.food = req?.body?.food;
+
+  return req?.body?.fecha && req?.body?.food
+    ? !menuFind || menuFind.state === false
+      ? (await getRepository(Menu)
+          .save(getRepository(Menu).create(menu))
+          .then()
+          .catch((err: Error) => {
+            throw res.status(400).json({ message: err.message });
+          })) && res.status(201).json({ message: 'Created' })
+      : res.status(200).json({ message: 'Menu exist' })
+    : res.status(400).send();
 };
 
 export const updateMenu = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  try {
-    const food = await getRepository(Menu).findOne(req.params.id);
-    if (food) {
-      getRepository(Menu).merge(food, req.body);
-      const results = await getRepository(Menu).save(food);
-      return res.json(results);
-    }
-    return res.status(204).json({ message: 'Not food found' });
-  } catch (error) {
-    const keyError = error.message.split(' ')[0];
-    return res.status(400).json({
-      message: `${error.message}`,
-      detail: `${error.detail}`,
-      key: `${keyError.charAt(0).toUpperCase() + keyError.slice(1)}`,
-    });
-  }
+  const menuFind: Menu | undefined = await getRepository(Menu).findOne({
+    where: [{ state: true, id: req?.params?.id }],
+  });
+  // const params = req.body?.fecha === undefined || req.body?.food === undefined;
+  // console.log(params);
+  return menuFind
+    ? req.body?.fecha || req.body?.food
+      ? getRepository(Menu).merge(menuFind, {
+          fecha: req.body?.fecha,
+          food: req.body?.food,
+        }) &&
+        res.status(200).json(
+          await getRepository(Menu)
+            .save(menuFind)
+            .then()
+            .catch((err: Error) => {
+              throw res.status(400).json({ message: err.message });
+            })
+        )
+      : res.status(400).send({ message: 'Complete all params' })
+    : res.status(400).send({ message: 'No menu found or deleted' });
 };
 
 export const deleteMenu = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  try {
-    const food = await getRepository(Menu).findOne(req.params.id);
-    req.body.state = false;
-    if (food) {
-      getRepository(Menu).merge(food, req.body);
-      const results = await getRepository(Menu).save(food);
-      return res.json(results);
-    }
-    return res.status(204).json({ message: 'Not food found' });
-  } catch (error) {
-    const keyError = error.message.split(' ')[0];
-    return res.status(400).json({
-      message: `${error.message}`,
-      detail: `${error.detail}`,
-      key: `${keyError.charAt(0).toUpperCase() + keyError.slice(1)}`,
-    });
-  }
+  const menuFind: Menu | undefined = await getRepository(Menu).findOne({
+    where: [{ state: true, id: req?.params?.id }],
+  });
+
+  return menuFind
+    ? getRepository(Menu).merge(menuFind, {
+        state: false,
+      }) &&
+        res.status(200).json(
+          await getRepository(Menu)
+            .save(menuFind)
+            .then()
+            .catch((err: Error) => {
+              throw res.status(400).json({ message: err.message });
+            })
+        )
+    : res.status(400).send();
 };

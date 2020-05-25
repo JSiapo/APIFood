@@ -1,16 +1,16 @@
 import 'reflect-metadata';
-import express from 'express';
-import morgan from 'morgan';
-import cors from 'cors';
-const helmet = require('helmet');
-import { createConnection } from 'typeorm';
-import { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, NODE_ENV } from './config';
 
-import FoodRoutes from './routes/food.route';
+import cors from 'cors';
+import express, { Request, Response } from 'express';
+import morgan from 'morgan';
+import { createConnection } from 'typeorm';
+
+import { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER, NODE_ENV } from './config';
+import AuthRoute from './routes/auth.route';
 import MenuRoutes from './routes/menu.routes';
 import UserRoutes from './routes/user.route';
-import AuthRoute from './routes/auth.route';
 
+const helmet = require('helmet');
 const app = express();
 createConnection({
   type: 'postgres',
@@ -21,20 +21,26 @@ createConnection({
   database: DB_NAME,
   entities: ['dist/entity/**/*.js'],
   logging: false,
-  synchronize: true,
-  ssl: true,
-});
+  synchronize: false,
+  ssl: { rejectUnauthorized: false },
+})
+  .then()
+  .catch((err: Error) => {
+    throw err;
+  });
+//middlewares
 const AuthToken = require('./middlewares/auth.middleware');
 app.use(helmet());
 app.use(cors());
 app.use(AuthToken);
 
-//middlewares
 app.use(cors());
 NODE_ENV == 'develop' ? app.use(morgan('dev')) : app.use(morgan('tiny'));
 app.use(express.json());
+app.all('/*', (req: Request, res: Response, next: Function) =>
+  req.method === 'OPTIONS' ? res.status(200).end() : next()
+);
 
-app.use('/api', FoodRoutes);
 app.use('/api', MenuRoutes);
 app.use('/api', UserRoutes);
 app.use('/api', AuthRoute);

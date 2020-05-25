@@ -1,5 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Food } from './food.entity';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Menu {
@@ -9,11 +8,8 @@ export class Menu {
   @Column()
   fecha: string;
 
-  @ManyToOne(
-    type => Food,
-    food => food.menus
-  )
-  food: Food;
+  @Column()
+  food: string;
 
   @Column({ default: true })
   state: boolean;
