@@ -22,5 +22,4 @@ test:
   stage: test
   script:
     - curl https://food-web-home.herokuapp.com/
-    - npm run test-ci
-  coverage: /All files\s*\|\s*([\d\.]+)/
+    - npm run test
