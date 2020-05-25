@@ -10,7 +10,7 @@ import {
 
 router.get('/menus/', getMenu);
 router.post('/menus/', createMenu);
-router.put('/menus/:id', updateMenu);
+router.patch('/menus/:id', updateMenu);
 router.delete('/menus/:id', deleteMenu);
 
 export default router;
